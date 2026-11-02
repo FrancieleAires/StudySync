@@ -3,8 +3,10 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import Footer from './components/layout/ui/footer'
 import Sidebar from './components/layout/ui/sidebar'
 import Header from './components/layout/ui/header'
+import NovaTarefa from './components/layout/ui/nova-tarefa'
 import Calendario from './pages/Calendario'
 import Tarefas from './pages/Tarefas'
+import Dashboard from './pages/Dashboard'
 import { TAREFAS_INICIAIS } from './data/tarefas'
 
 const usuario = {
@@ -24,6 +26,7 @@ function EmConstrucao({ titulo }) {
 
 function App() {
   const [tarefas, setTarefas] = useState(TAREFAS_INICIAIS)
+  const [novaTarefaAberta, setNovaTarefaAberta] = useState(false)
 
   function alternarTarefa(id) {
     setTarefas(tarefas.map((tarefa) =>
@@ -32,7 +35,11 @@ function App() {
   }
 
   function abrirNovaTarefa() {
-    alert('Aqui vai abrir a tela de nova tarefa')
+    setNovaTarefaAberta(true)
+  }
+
+  function adicionarTarefa(novaTarefa) {
+    setTarefas([...tarefas, novaTarefa])
   }
 
   return (
@@ -42,7 +49,7 @@ function App() {
       <main className="pb-24 md:pb-8 md:pl-56">
         <Routes>
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
-          <Route path="/dashboard" element={<EmConstrucao titulo="Dashboard" />} />
+          <Route path="/dashboard" element={<Dashboard tarefas={tarefas} />} />
           <Route path="/tasks" element={<Tarefas tarefas={tarefas} onAlternar={alternarTarefa} />} />
           <Route path="/calendar" element={<Calendario tarefas={tarefas} />} />
           <Route path="/profile" element={<EmConstrucao titulo="Perfil" />} />
@@ -51,6 +58,12 @@ function App() {
       </main>
 
       <Footer onAdicionar={abrirNovaTarefa} iniciais={usuario.iniciais} />
+
+      <NovaTarefa
+        aberto={novaTarefaAberta}
+        onFechar={() => setNovaTarefaAberta(false)}
+        onSalvar={adicionarTarefa}
+      />
     </div>
   )
 }
