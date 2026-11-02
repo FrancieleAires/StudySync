@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Roboto', system-ui, 'Segoe UI', sans-serif;
+}
+
+body {
+  margin: 0;
+  background-color: #F5E9FA;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
