@@ -49,6 +49,7 @@ function NovaTarefa({ aberto, onFechar, onSalvar }) {
                         <X className="w-5 h-5" />
                     </button>
                 </div>
+
                 <div className="flex items-start justify-between">
                     <div>
                         <h2 className="text-xl font-bold text-[#4A2A63]">
