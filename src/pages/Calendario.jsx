@@ -17,10 +17,11 @@ function BotaoMes({ children, onClick, label }) {
         <button
             type="button"
             aria-label={label}
+            title={label}
             onClick={onClick}
-            className="flex items-center justify-center w-7 h-9 rounded-lg bg-[#F5E9FA] text-[#7B3A9E] text-sm hover:bg-[#EBDDF5] transition-colors"
+            className="flex items-center justify-center w-7 h-9 rounded-lg bg-[#F5E9FA] text-[#7B3A9E] text-sm hover:bg-[#EBDDF5] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6B2C91]"
         >
-            {children}
+            <span aria-hidden="true">{children}</span>
         </button>
     );
 }
@@ -30,11 +31,16 @@ function DiaCalendario({ dia, ehHoje, tarefas }) {
         <div
             className={`h-11 md:h-14 rounded-xl border p-1.5 md:p-1.5 flex flex-col gap-1 overflow-hidden ${ehHoje ? 'bg-[#F5E9FA] border-[#7B3A9E]' : 'bg-white border-[#E3D5EE]'}`}
         >
-            <span className="text-xs text-[#4A2A63] leading-none">{dia}</span>
+            <span className="text-xs text-[#4A2A63] leading-none" aria-label={`Dia ${dia}`}>
+                {dia}
+            </span>
 
             {tarefas.map((tarefa) => (
                 <div key={tarefa.id} title={tarefa.titulo}>
-                    <div className={`md:hidden h-1 rounded-full ${tarefa.concluida ? 'bg-[#E9DDF3]' : 'bg-[#A56BC9]'}`} />
+                    <div
+                        aria-hidden="true"
+                        className={`md:hidden h-1 rounded-full ${tarefa.concluida ? 'bg-[#E9DDF3]' : 'bg-[#A56BC9]'}`}
+                    />
                     <div
                         className={`hidden md:block truncate rounded px-1 text-[9px] leading-[14px] ${tarefa.concluida ? 'bg-[#E9DDF3] text-[#B48DCC]' : 'bg-[#A56BC9] text-white'}`}
                     >
@@ -82,7 +88,10 @@ function Calendario({ tarefas }) {
         <>
             <Header titulo="Calendário" />
 
-            <section className="select-none cursor-default mx-5 md:mx-auto md:max-w-xl rounded-3xl bg-white p-5 shadow-sm">
+            <section
+                aria-label={`Calendário de ${NOMES_MESES[mes]} de ${ano}`}
+                className="select-none cursor-default mx-5 md:mx-auto md:max-w-xl rounded-3xl bg-white p-5 shadow-sm"
+            >
                 <div className="flex items-center justify-between mb-6">
                     <h2 className="text-xl md:text-lg font-bold text-[#4A2A63]">
                         {NOMES_MESES[mes]} de {ano}
@@ -93,7 +102,7 @@ function Calendario({ tarefas }) {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-7 gap-2 mb-3">
+                <div className="grid grid-cols-7 gap-2 mb-3" aria-hidden="true">
                     {DIAS_SEMANA.map((nome) => (
                         <span key={nome} className="text-center text-xs font-medium text-[#A56BC9]">
                             {nome}
@@ -104,7 +113,7 @@ function Calendario({ tarefas }) {
                 <div className="grid grid-cols-7 gap-2">
                     {celulas.map((dia, indice) => {
                         if (dia === null) {
-                            return <div key={`vazio-${indice}`} />;
+                            return <div key={`vazio-${indice}`} aria-hidden="true" />;
                         }
 
                         const data = formatarData(ano, mes, dia);

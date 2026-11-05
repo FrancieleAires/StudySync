@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
 import { MATERIAS } from '../../../data/tarefas';
 
@@ -6,6 +6,19 @@ function NovaTarefa({ aberto, onFechar, onSalvar }) {
     const [titulo, setTitulo] = useState('');
     const [materia, setMateria] = useState('');
     const [data, setData] = useState('');
+
+    useEffect(() => {
+        if (!aberto) return;
+
+        function lidarComTecla(e) {
+            if (e.key === 'Escape') {
+                onFechar();
+            }
+        }
+
+        window.addEventListener('keydown', lidarComTecla);
+        return () => window.removeEventListener('keydown', lidarComTecla);
+    }, [aberto, onFechar]);
 
     if (!aberto) return null;
 
@@ -33,6 +46,10 @@ function NovaTarefa({ aberto, onFechar, onSalvar }) {
             onClick={onFechar}
         >
             <div
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="modal-nova-tarefa-titulo"
+                aria-describedby="modal-nova-tarefa-descricao"
                 className="w-full max-w-md rounded-3xl bg-white p-6 md:p-7 shadow-xl"
                 onClick={(e) => e.stopPropagation()}
             >
@@ -44,18 +61,25 @@ function NovaTarefa({ aberto, onFechar, onSalvar }) {
                         type="button"
                         onClick={onFechar}
                         aria-label="Fechar modal"
-                        className="text-[#6B2C91] hover:text-[#4A2A63]"
+                        title="Fechar modal"
+                        className="rounded-lg p-1 text-[#6B2C91] hover:text-[#4A2A63] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6B2C91]"
                     >
-                        <X className="w-5 h-5" />
+                        <X className="w-5 h-5" aria-hidden="true" />
                     </button>
                 </div>
 
                 <div className="flex items-start justify-between">
                     <div>
-                        <h2 className="text-xl font-bold text-[#4A2A63]">
+                        <h2
+                            id="modal-nova-tarefa-titulo"
+                            className="text-xl font-bold text-[#4A2A63]"
+                        >
                             Criar tarefa
                         </h2>
-                        <p className="mt-0.5 text-xs text-[#A56BC9]">
+                        <p
+                            id="modal-nova-tarefa-descricao"
+                            className="mt-0.5 text-xs text-[#A56BC9]"
+                        >
                             Adicione uma nova tarefa à sua agenda.
                         </p>
                     </div>
@@ -64,37 +88,47 @@ function NovaTarefa({ aberto, onFechar, onSalvar }) {
                         type="button"
                         onClick={onFechar}
                         aria-label="Fechar modal"
-                        className="hidden md:block text-[#A56BC9] hover:text-[#6B2C91]"
+                        title="Fechar modal"
+                        className="hidden md:block rounded-lg p-1 text-[#A56BC9] hover:text-[#6B2C91] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6B2C91]"
                     >
-                        <X className="w-4 h-4" />
+                        <X className="w-4 h-4" aria-hidden="true" />
                     </button>
                 </div>
 
                 <form onSubmit={handleSubmit} className="mt-5 flex flex-col gap-4">
                     <div>
-                        <label className="mb-1.5 block text-xs font-semibold text-[#4A2A63]">
+                        <label
+                            htmlFor="campo-titulo-tarefa"
+                            className="mb-1.5 block text-xs font-semibold text-[#4A2A63]"
+                        >
                             Título da tarefa
                         </label>
                         <input
+                            id="campo-titulo-tarefa"
                             type="text"
                             required
+                            autoFocus
                             placeholder="Ex.: rascunho de redação"
                             value={titulo}
                             onChange={(e) => setTitulo(e.target.value)}
-                            className="w-full rounded-xl border border-[#EDE4F3] bg-[#F5E9FA]/40 px-3.5 py-2.5 text-sm text-[#4A2A63] placeholder-[#B48DCC] focus:border-[#A56BC9] focus:outline-none"
+                            className="w-full rounded-xl border border-[#EDE4F3] bg-[#F5E9FA]/40 px-3.5 py-2.5 text-sm text-[#4A2A63] placeholder-[#B48DCC] focus:border-[#A56BC9] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#6B2C91]"
                         />
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <label className="mb-1.5 block text-xs font-semibold text-[#4A2A63]">
+                            <label
+                                htmlFor="campo-disciplina-tarefa"
+                                className="mb-1.5 block text-xs font-semibold text-[#4A2A63]"
+                            >
                                 Disciplina
                             </label>
                             <select
+                                id="campo-disciplina-tarefa"
                                 required
                                 value={materia}
                                 onChange={(e) => setMateria(e.target.value)}
-                                className="w-full rounded-xl border border-[#EDE4F3] bg-[#F5E9FA]/40 px-3 py-2.5 text-sm text-[#4A2A63] focus:border-[#A56BC9] focus:outline-none"
+                                className="w-full rounded-xl border border-[#EDE4F3] bg-[#F5E9FA]/40 px-3 py-2.5 text-sm text-[#4A2A63] focus:border-[#A56BC9] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#6B2C91]"
                             >
                                 <option value="" disabled>
                                     Selecione a disciplina
@@ -108,22 +142,27 @@ function NovaTarefa({ aberto, onFechar, onSalvar }) {
                         </div>
 
                         <div>
-                            <label className="mb-1.5 block text-xs font-semibold text-[#4A2A63]">
+                            <label
+                                htmlFor="campo-data-tarefa"
+                                className="mb-1.5 block text-xs font-semibold text-[#4A2A63]"
+                            >
                                 Data de entrega
                             </label>
                             <input
+                                id="campo-data-tarefa"
                                 type="date"
                                 required
                                 value={data}
                                 onChange={(e) => setData(e.target.value)}
-                                className="w-full rounded-xl border border-[#EDE4F3] bg-[#F5E9FA]/40 px-3.5 py-2.5 text-sm text-[#4A2A63] focus:border-[#A56BC9] focus:outline-none"
+                                className="w-full rounded-xl border border-[#EDE4F3] bg-[#F5E9FA]/40 px-3.5 py-2.5 text-sm text-[#4A2A63] focus:border-[#A56BC9] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#6B2C91]"
                             />
                         </div>
                     </div>
 
                     <button
                         type="submit"
-                        className="mt-2 w-full rounded-xl bg-[#6B2C91] py-3 text-sm font-semibold text-white transition-colors hover:bg-[#582378]"
+                        title="Adicionar tarefa"
+                        className="mt-2 w-full rounded-xl bg-[#6B2C91] py-3 text-sm font-semibold text-white transition-colors hover:bg-[#582378] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6B2C91] focus-visible:ring-offset-2"
                     >
                         Adicionar tarefa
                     </button>
