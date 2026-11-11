@@ -15,15 +15,6 @@ const usuario = {
   descricao: 'Estudante Ensino Médio',
 }
 
-function EmConstrucao({ titulo }) {
-  return (
-    <>
-      <Header titulo={titulo} />
-      <p className="px-5 md:px-8 text-[#8B5CA8]">Tela em construção.</p>
-    </>
-  )
-}
-
 function App() {
   const [tarefas, setTarefas] = useState(TAREFAS_INICIAIS)
   const [novaTarefaAberta, setNovaTarefaAberta] = useState(false)
@@ -52,8 +43,6 @@ function App() {
           <Route path="/dashboard" element={<Dashboard tarefas={tarefas} />} />
           <Route path="/tasks" element={<Tarefas tarefas={tarefas} onAlternar={alternarTarefa} />} />
           <Route path="/calendar" element={<Calendario tarefas={tarefas} />} />
-          <Route path="/profile" element={<EmConstrucao titulo="Perfil" />} />
-          <Route path="*" element={<EmConstrucao titulo="Página não encontrada" />} />
         </Routes>
       </main>
 
