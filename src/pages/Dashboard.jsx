@@ -76,7 +76,6 @@ function Dashboard({ tarefas = [] }) {
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
-                    {/* Progresso semanal */}
                     <section
                         aria-labelledby="progresso-titulo"
                         className="lg:col-span-2 flex flex-col justify-center rounded-3xl bg-white p-7 border border-[#EDE4F3]"
@@ -119,7 +118,6 @@ function Dashboard({ tarefas = [] }) {
                         </div>
                     </section>
 
-                    {/* Próxima tarefa */}
                     <section
                         aria-labelledby="seguir-titulo"
                         className="rounded-3xl bg-[#6B2C91] p-7 text-white flex flex-col justify-between"
@@ -167,7 +165,6 @@ function Dashboard({ tarefas = [] }) {
 
                 </div>
 
-                {/* Próximos prazos */}
                 <section
                     aria-labelledby="prazos-titulo"
                     className="rounded-3xl bg-white p-7 border border-[#EDE4F3]"

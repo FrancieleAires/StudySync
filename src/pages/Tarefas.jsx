@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Check, CalendarDays } from 'lucide-react';
 import Header from '../components/layout/ui/header';
@@ -17,6 +16,7 @@ const CORES_MATERIAS = {
 const COR_PADRAO = 'bg-[#EBDDF5] text-[#6B2C91]';
 
 function formatarDataBR(data) {
+    if (!data) return '';
     const [ano, mes, dia] = data.split('-');
     return `${dia}/${mes}/${ano}`;
 }
@@ -74,9 +74,9 @@ function CartaoTarefa({ tarefa, onAlternar }) {
                 )}
             </button>
 
-            <div className={`min-w-0 ${concluida ? 'opacity-50' : ''}`}>
+            <div className={`min-w-0 flex-1 ${concluida ? 'opacity-50' : ''}`}>
                 <p
-                    className={`font-medium md:text-sm ${
+                    className={`font-medium break-words md:text-sm ${
                         concluida
                             ? 'line-through text-[#B48DCC]'
                             : 'text-[#4A2A63]'
@@ -94,14 +94,19 @@ function CartaoTarefa({ tarefa, onAlternar }) {
                         {materia}
                     </span>
 
-                    <span className="flex items-center gap-1">
-                        <CalendarDays
-                            className="w-3.5 h-3.5"
-                            strokeWidth={2}
-                            aria-hidden="true"
-                        />
-                        {formatarDataBR(data)}
-                    </span>
+                    {data && (
+                        <time
+                            dateTime={data}
+                            className="flex items-center gap-1"
+                        >
+                            <CalendarDays
+                                className="w-3.5 h-3.5"
+                                strokeWidth={2}
+                                aria-hidden="true"
+                            />
+                            {formatarDataBR(data)}
+                        </time>
+                    )}
                 </div>
             </div>
         </li>
@@ -116,7 +121,7 @@ function Tarefas({ tarefas = [], onAlternar }) {
             (tarefa) =>
                 filtro === 'Todas' || tarefa.materia === filtro
         )
-        .sort((a, b) => a.data.localeCompare(b.data));
+        .sort((a, b) => (a.data || '').localeCompare(b.data || ''));
 
     const pendentes = filtradas.filter(
         (tarefa) => !tarefa.concluida
@@ -134,7 +139,7 @@ function Tarefas({ tarefas = [], onAlternar }) {
 
                 <nav
                     aria-label="Filtros de tarefas por matéria"
-                    className="flex gap-2 overflow-x-auto px-5 md:px-0 pb-1 mb-5 [scrollbar-width:none]"
+                    className="flex gap-2 overflow-x-auto px-5 md:px-0 pb-1 mb-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
                 >
                     {['Todas', ...MATERIAS].map((materia) => (
                         <BotaoFiltro
@@ -173,12 +178,13 @@ function Tarefas({ tarefas = [], onAlternar }) {
                                 ))}
                             </ul>
                         ) : (
-                            <p
+                            <div
                                 role="status"
-                                className="py-6 text-center text-sm text-[#A56BC9]"
+                                tabIndex={0}
+                                className="rounded-2xl border border-dashed border-[#DFC9EE] bg-white/40 py-6 text-center text-sm text-[#A56BC9] select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6B2C91] focus-visible:ring-offset-2"
                             >
                                 Nenhuma tarefa pendente. 🎉
-                            </p>
+                            </div>
                         )}
                     </section>
 
