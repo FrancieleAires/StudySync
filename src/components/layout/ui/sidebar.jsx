@@ -53,12 +53,7 @@ function Sidebar({ onAdicionar, usuario }) {
                 ))}
             </nav>
 
-            <NavLink
-                to="/profile"
-                aria-label={`Perfil de ${usuario.nome}`}
-                title={`Perfil de ${usuario.nome}`}
-                className="mt-auto flex items-center gap-3 p-3 rounded-xl bg-[#F5E9FA] hover:bg-[#EBDDF5] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6B2C91]"
-            >
+            <div className="mt-auto flex items-center gap-3 p-3 rounded-xl bg-[#F5E9FA] select-none">
                 <div
                     aria-hidden="true"
                     className="flex items-center justify-center w-10 h-10 rounded-lg bg-white text-[#4A2A63] text-sm font-bold"
@@ -69,7 +64,7 @@ function Sidebar({ onAdicionar, usuario }) {
                     <p className="text-sm font-medium text-[#4A2A63]">{usuario.nome}</p>
                     <p className="text-xs text-[#A56BC9]">{usuario.descricao}</p>
                 </div>
-            </NavLink>
+            </div>
         </aside>
     );
 }

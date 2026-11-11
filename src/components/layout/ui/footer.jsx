@@ -60,27 +60,15 @@ function Footer({ onAdicionar, iniciais = 'AL' }) {
                     <BotaoNav key={item.rota} item={item} />
                 ))}
 
-                <NavLink
-                    to="/profile"
-                    aria-label="Perfil"
-                    title="Perfil"
-                    className="flex flex-col items-center justify-center gap-1 rounded-lg py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6B2C91]"
-                >
-                    {({ isActive }) => (
-                        <>
-                            <span
-                                aria-hidden="true"
-                                className="flex items-center justify-center w-9 h-9 rounded-full bg-[#EBDDF5] text-[#4A2A63] text-sm font-semibold"
-                            >
-                                {iniciais}
-                            </span>
-                            <span
-                                aria-hidden="true"
-                                className={`w-1.5 h-1.5 rounded-full ${isActive ? 'bg-[#2D1B3D]' : 'bg-transparent'}`}
-                            />
-                        </>
-                    )}
-                </NavLink>
+                <div className="flex flex-col items-center justify-center gap-1 py-1 select-none">
+                    <span
+                        aria-label={`Usuário: ${iniciais}`}
+                        className="flex items-center justify-center w-9 h-9 rounded-full bg-[#EBDDF5] text-[#4A2A63] text-sm font-semibold"
+                    >
+                        {iniciais}
+                    </span>
+                    <span aria-hidden="true" className="w-1.5 h-1.5" />
+                </div>
             </nav>
         </footer>
     );
