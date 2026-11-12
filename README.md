@@ -1,4 +1,4 @@
-# 📚 StudySync — Gerenciador de Tarefas Acadêmicas
+#  StudySync — Gerenciador de Tarefas Acadêmicas
 
 &gt; **Projeto Prático da Disciplina de Interação Humano-Computador (IHC - TP2 / ATP)**  
 &gt; **Universidade Católica de Santos (UNISANTOS)**  
@@ -6,7 +6,16 @@
 
 ---
 
-## 📌 Sobre o Projeto
+##  Stack Tecnológica
+
+- **Front-end:** React + Vite
+- **Linguagens:** HTML5, CSS3, JavaScript (ES6+)
+- **Prototipação:** Figma
+- **Deploy &amp; Hospedagem:** Vercel
+- **Controle de Versão:** GitHub
+
+---
+##  Sobre o Projeto
 
 O **StudySync** é uma aplicação web responsiva projetada para ajudar estudantes do Ensino Médio a organizarem suas rotinas acadêmicas, acompanharem prazos de entregas e avaliações, e reduzirem a carga cognitiva durante os estudos.
 
@@ -14,7 +23,7 @@ Desenvolvido com base nos princípios do **Design Centrado no Usuário (DCU)**, 
 
 ---
 
-## ⚡ Principais Funcionalidades
+##  Principais Funcionalidades
 
 - 📅 **Calendário Acadêmico Interativo:** Visualização clara de entregas, avaliações e compromissos.
 - 📋 **Quadro de Tarefas &amp; Modais:** Criação, edição e acompanhamento de tarefas por status de conclusão.
@@ -25,7 +34,7 @@ Desenvolvido com base nos princípios do **Design Centrado no Usuário (DCU)**, 
 
 ---
 
-## ♿ Acessibilidade (WCAG 2.1/2.2) e Usabilidade (Nielsen)
+## Acessibilidade (WCAG 2.1/2.2) e Usabilidade (Nielsen)
 
 A interface do StudySync foi planejada e avaliada sob rigorosos critérios de IHC:
 
@@ -39,19 +48,10 @@ A interface do StudySync foi planejada e avaliada sob rigorosos critérios de IH
   - **Contenção de Foco (*Focus Trap*):** Em modais abertos, o foco do teclado permanece retido dentro do diálogo.
   - **Contraste de Cores (WCAG Level AA):** Razão de contraste mínima de 4.5:1 em textos e componentes de interface.
 
----
-
-## 🛠️ Stack Tecnológica
-
-- **Front-end:** React + Vite
-- **Linguagens:** HTML5, CSS3, JavaScript (ES6+)
-- **Prototipação:** Figma
-- **Deploy &amp; Hospedagem:** Vercel
-- **Controle de Versão:** GitHub
 
 ---
 
-## 👥 Colaboradores
+##  Colaboradores
 
 - **Franciele Aires da Silva**
 - **Lucas Verissimo Gonçalves**
@@ -59,7 +59,7 @@ A interface do StudySync foi planejada e avaliada sob rigorosos critérios de IH
 
 ---
 
-## 🔗 Links do Projeto
+##  Links do Projeto
 
 - 🌐 **Aplicação em Produção (Vercel):** `https://study-sync-flame-tau.vercel.app/`
 - 🎨 **Protótipo (Figma):** `https://www.figma.com/design/sdCPfrbUVuKfAhmFZluBrr/Figma-StudySync?node-id=0-1&p=f&t=EAxxSuEJ9eiWd3xP-0`
